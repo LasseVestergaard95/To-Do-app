@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>To Do</title>
+</head>
+<body>
+    <h1>TO DO APP</h1>
+<p>Nedenunder kan du tilføje en opgave til din To Do liste. Hvis du vil tilføje antal kan du også gøre det</p>
+
+<form id="form_task">
+    <input type="text"name="text" id="task" placeholder="Skriv her...">
+    <input type="number"name="number" id="quantity" placeholder="Antal">
+    <button type="button" id="send_task" onclick="storeInput()">Tilføj</button>
+</form>
+
+<h2>Aktive opgaver</h2>
+<ul id="active_list"></ul>
+
+<h2>Færdige opgaver</h2>
+<ul class="done_list"></ul>
+    <script src="script.js"></script>
+</body>
+</html>
