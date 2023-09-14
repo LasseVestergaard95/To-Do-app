@@ -23,7 +23,7 @@ function storeInput() {
   task.value = "";
   quantity.value = "";
 
-  console.log(activeArr);
+  console.log("aktive opgaver", activeArr);
 }
 
 // denne funktion tager activeArr og appender det nye objekts værdier til list items.
@@ -46,7 +46,7 @@ function addTask() {
     });
     const deleteBtn = document.createElement("button");
     deleteBtn.innerHTML = "slet";
-    deleteBtn.addEventListener("click", () => deleteTask(taskObj, index));
+    deleteBtn.addEventListener("click", () => deleteTask(taskObj));
 
     const taskText = document.createTextNode(`${taskObj.task} ${taskObj.quantity}`);
     li.appendChild(checkbox);
@@ -58,6 +58,7 @@ function addTask() {
 
 function moveToDone(taskObj) {
   const ulDone = document.getElementById("done_list");
+  ulDone.innerHTML = "";
 
   doneArr.push(taskObj);
   let index = activeArr.indexOf(taskObj);
@@ -73,6 +74,7 @@ function moveToDone(taskObj) {
     checkbox.checked = taskObj.done;
     const deleteBtn = document.createElement("button");
     deleteBtn.innerHTML = "slet";
+    deleteBtn.addEventListener("click", () => deleteTask(taskObj));
 
     const taskText = document.createTextNode(`${taskObj.task} ${taskObj.quantity}`);
     li.appendChild(checkbox);
@@ -82,12 +84,15 @@ function moveToDone(taskObj) {
   });
   addTask();
 
-  console.log(doneArr);
+  console.log("færdige opgaver", doneArr);
 }
 
-function deleteTask(taskObj, index) {
-  activeArr.splice(index, 1);
+function deleteTask(taskObj) {
+  if (taskObj.done) {
+    doneArr.splice(doneArr.indexOf(taskObj), 1);
+  } else {
+    activeArr.splice(activeArr.indexOf(taskObj), 1);
+  }
 
   addTask();
-  console.log(activeArr);
 }
