@@ -59,16 +59,12 @@ function addTask() {
 
         ulDone.innerHTML = "";
         doneArr.forEach((taskObj) => {
-          li.appendChild(checkbox);
-          li.appendChild(taskText);
-          li.appendChild(deleteBtn);
           ulDone.appendChild(li);
-          console.log("doneArr", doneArr)
+          console.log("doneArr", doneArr);
         });
       }
     });
   });
-
 }
 
 function deleteTask(taskObj) {
@@ -77,8 +73,8 @@ function deleteTask(taskObj) {
   } else {
     activeArr.splice(activeArr.indexOf(taskObj), 1);
   }
-  console.log("doneArr", doneArr)
-  console.log("aktivArr", activeArr)
+  console.log("doneArr", doneArr);
+  console.log("aktivArr", activeArr);
 
   addTask();
 }
