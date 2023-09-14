@@ -37,7 +37,7 @@ function addTask() {
   activeArr.forEach((taskObj) => {
     const li = document.createElement("li");
     const checkbox = document.createElement("input");
-    const taskText = document.createTextNode(`${taskObj.task} ${taskObj.quantity}`);
+    const taskText = document.createTextNode(`${taskObj.quantity} ${taskObj.task} `);
     const deleteBtn = document.createElement("button");
     checkbox.type = "checkbox";
     checkbox.checked = taskObj.done;
@@ -54,13 +54,13 @@ function addTask() {
       if (taskObj.done) {
         doneArr.push(taskObj);
         const index = activeArr.indexOf(taskObj);
-
         activeArr.splice(index, 1);
 
         ulDone.innerHTML = "";
         doneArr.forEach((taskObj) => {
           ulDone.appendChild(li);
           console.log("doneArr", doneArr);
+
         });
       }
     });
