@@ -11,7 +11,7 @@ function storeInput() {
 
   const taskValue = task.value;
   const quantityValue = quantity.value;
-// done bliver som udgangspunktet defineret til 'false' da den jo er aktiv indtil den bliver checked.
+  // done bliver som udgangspunktet defineret til 'false' da den jo er aktiv indtil den bliver checked.
   const taskObj = { task: taskValue, quantity: quantityValue, done: false };
 
   // her bliver vores nye objekt pushet ind i vores array med aktive tasks.
@@ -26,12 +26,12 @@ function storeInput() {
   console.log(activeArr);
 }
 
-// denne funktion tager activeArr og appender det nye objekts værdier til list items. 
+// denne funktion tager activeArr og appender det nye objekts værdier til list items.
 function addTask() {
   const ulActive = document.getElementById("active_list");
   ulActive.innerHTML = "";
 
-  // vi looper igennem hvert objekt. Udover at vise hvert objekt, vil vi gerne have en checkbox som vi kan hakke af i når opgaven er done. Dette fører os ned i en ny funktion.
+  // vi looper igennem hvert objekt. Udover at vise hvert objekt, vil vi gerne have en checkbox som vi kan hakke af i når opgaven er done. Dette fører os ned i en ny funktion. Det samme gælder for delete knappen.
   activeArr.forEach((taskObj) => {
     const li = document.createElement("li");
     const checkbox = document.createElement("input");
@@ -44,27 +44,26 @@ function addTask() {
         moveToDone(taskObj);
       }
     });
+    const deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = "slet";
+    deleteBtn.addEventListener("click", () => deleteTask(taskObj, index));
 
     const taskText = document.createTextNode(`${taskObj.task} ${taskObj.quantity}`);
     li.appendChild(checkbox);
     li.appendChild(taskText);
+    li.appendChild(deleteBtn);
     ulActive.appendChild(li);
   });
 }
 
 function moveToDone(taskObj) {
   const ulDone = document.getElementById("done_list");
-  
-  if (!taskObj.hasOwnProperty("done")) {
-    taskObj.done = false; 
-  }
 
   doneArr.push(taskObj);
-  const index = activeArr.indexOf(taskObj);
-  if (index !== -1) {
-    activeArr.splice(index, 1);
-  }
-  
+  let index = activeArr.indexOf(taskObj);
+
+  activeArr.splice(index, 1);
+
   ulDone.innerHTML = "";
   doneArr.forEach((taskObj) => {
     const li = document.createElement("li");
@@ -72,12 +71,23 @@ function moveToDone(taskObj) {
 
     checkbox.type = "checkbox";
     checkbox.checked = taskObj.done;
+    const deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = "slet";
+
     const taskText = document.createTextNode(`${taskObj.task} ${taskObj.quantity}`);
-    li.appendChild(checkbox)
-    li.appendChild(taskText)
+    li.appendChild(checkbox);
+    li.appendChild(taskText);
+    li.appendChild(deleteBtn);
     ulDone.appendChild(li);
   });
-
-  console.log(doneArr)
   addTask();
+
+  console.log(doneArr);
+}
+
+function deleteTask(taskObj, index) {
+  activeArr.splice(index, 1);
+
+  addTask();
+  console.log(activeArr);
 }
