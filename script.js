@@ -56,7 +56,7 @@ function moveToDone(taskObj) {
   const ulDone = document.getElementById("done_list");
   
   if (!taskObj.hasOwnProperty("done")) {
-    taskObj.done = false; // Initialize "done" property if it doesn't exist
+    taskObj.done = false; 
   }
 
   doneArr.push(taskObj);
@@ -65,13 +65,19 @@ function moveToDone(taskObj) {
     activeArr.splice(index, 1);
   }
   
-  ulDone.innerHTML = ""; // Clear the done list and recreate it.
+  ulDone.innerHTML = "";
   doneArr.forEach((taskObj) => {
     const li = document.createElement("li");
+    const checkbox = document.createElement("input");
+
+    checkbox.type = "checkbox";
+    checkbox.checked = taskObj.done;
     const taskText = document.createTextNode(`${taskObj.task} ${taskObj.quantity}`);
+    li.appendChild(checkbox)
     li.appendChild(taskText)
     ulDone.appendChild(li);
   });
-  
+
+  console.log(doneArr)
   addTask();
 }
